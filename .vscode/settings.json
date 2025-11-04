@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "string.h": "c",
+        "cbm858xm.h": "c"
+    }
+}
