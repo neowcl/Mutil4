@@ -58,6 +58,9 @@ uint16_t Soc_OCV_Calibration(uint16_t Rsoc_now,uint16_t* buf);
 void DBPT_test(void);
 
 
+
+
+
 #ifdef __cplusplus
 }
 #endif

@@ -60,6 +60,9 @@ extern int32_t lrc_w_last ;
 extern uint16_t  t_com0dsoclast ; 
 extern int8_t CellTemp_last_time_update ; 
 
+extern uint16_t pi_sum_time;
+extern uint16_t pi_temp_time;
+
 extern uint8_t tx_count;
 extern uint8_t g_RecvCnt;
 extern uint8_t rx_buffer[BUFFER_LEN];

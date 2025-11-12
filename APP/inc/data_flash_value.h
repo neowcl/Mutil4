@@ -3119,6 +3119,7 @@ typedef struct{
 	uint8_t                           	m_3st_PF_Status_B;                 	/*说明:*/
 	uint8_t                           	m_3st_PF_Status_C;                 	/*说明:*/
 	uint8_t                           	m_3st_PF_Status_D;                 	/*说明:*/
+	uint16_t                            m_Pi_Mode_Count;
 }LifeTimes;
 #define LifeTimes_Cell_1_Max_Voltage                    	l_lifetimes.m_Cell_1_Max_Voltage
 #define LifeTimes_Cell_2_Max_Voltage                    	l_lifetimes.m_Cell_2_Max_Voltage
@@ -3298,6 +3299,7 @@ typedef struct{
 #define LifeTimes_3st_PF_Status_B                       	l_lifetimes.m_3st_PF_Status_B
 #define LifeTimes_3st_PF_Status_C                       	l_lifetimes.m_3st_PF_Status_C
 #define LifeTimes_3st_PF_Status_D                       	l_lifetimes.m_3st_PF_Status_D
+#define LifeTimes_Pi_Mode_Count                             l_lifetimes.m_Pi_Mode_Count 
 
 typedef struct{
 	S_Calibdata                        	s_Calibdata;

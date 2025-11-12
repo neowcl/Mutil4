@@ -159,7 +159,10 @@ typedef struct
 	uint32_t RX		          : 1;     
 	uint32_t LDMD             : 1;
     uint32_t OCVFR       	  : 1;
-    uint32_t RSVD2            : 11;
+  uint32_t PI_EN             :1;
+  uint32_t PI_MODE           :1;
+  uint32_t PI_TESE            :1;
+    uint32_t RSVD2            : 8;
 } GAUGING_STATUS;//GaugingStatus 0X0056
 
 typedef union
@@ -188,6 +191,9 @@ extern GaugingStatus nGaugingStatus;
 #define f_gs_rx   nGaugingStatus.GaugingStatus_f.RX
 #define f_gs_ldmd   nGaugingStatus.GaugingStatus_f.LDMD
 #define f_gs_ocvfr   nGaugingStatus.GaugingStatus_f.OCVFR
+#define f_pi_en      nGaugingStatus.GaugingStatus_f.PI_EN
+#define f_pi_mode    nGaugingStatus.GaugingStatus_f.PI_MODE
+#define f_pi_test    nGaugingStatus.GaugingStatus_f.PI_TESE
 
 typedef struct
 {
@@ -274,8 +280,6 @@ extern  uint16_t        t_com79;
 #define f_fullchg       DEF_BIT10(&t_com79)      // Fullcharge
 #define f_pto_start     DEF_BIT11(&t_com79)      // pto start flag
 #define f_cto_start     DEF_BIT12(&t_com79)      // cto start flag
-#define f_pi_mode       DEF_BIT13(&t_com79)
-#define f_pi_test       DEF_BIT14(&t_com79)   
 #define f_pi_mode_last      DEF_BIT15(&t_com79) 
 
 

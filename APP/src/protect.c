@@ -2431,6 +2431,8 @@ void plugged_IN(void)
    static uint16_t pi_count = 0 ;
    static uint16_t rsoc_pi= 0 ;
    static int32_t Record_lrc_w_pi = 0 ;
+   
+   f_pi_en=D_DA_Configuration_PI_EN;
 
    if (D_DA_Configuration_PI_EN)
    {
@@ -2481,6 +2483,13 @@ void plugged_IN(void)
                    f_pi_mode = 1;
                }
            }
+           pi_sum_time = socdelay / TIME_TO_HOUR;
+           pi_temp_time = daydelay / TIME_TO_HOUR;
+           if (f_pi_mode)
+           {
+               LifeTimes_Pi_Mode_Count++;
+               f_ltreqW = ON;
+           }
        }
        else
        {
@@ -2492,7 +2501,14 @@ void plugged_IN(void)
            else
            {
                pi_blance_enable();
-               _ChargingVoltage -= D_PI_MODE_PI_Delte_Voltage;
+               if (_ChargingVoltage >= D_PI_MODE_PI_Delte_Voltage)
+               {
+                   _ChargingVoltage -= D_PI_MODE_PI_Delte_Voltage;
+               }
+               else
+               {
+                   _ChargingVoltage = 0;
+               }
            }
            daydelay = 0;
            socdelay = 0;
@@ -2502,7 +2518,7 @@ void plugged_IN(void)
            sevendex = 0;
        }
    }
-   if (f_discharge)
+   if (f_discharge && (!BatteryStatus(FC)))
    {
 
        f_pi_mode = 0;
@@ -2512,8 +2528,9 @@ void plugged_IN(void)
        one_day = 0;
        memset(data_tt, 0, sizeof(data_tt));
        daydex = 0;
-        sevendex = 0;
+       sevendex = 0;
    }
+   
 
    if (f_charge)
    {
@@ -2523,10 +2540,6 @@ void plugged_IN(void)
 
 
 
-
-   // TO  DO  
-// 1. pi_count = 0;
-  // 2.  f_pi_pinghua = 0;
 
 
     if(f_pi_mode)  // pimode  finished，  then re evaluate . 
