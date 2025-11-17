@@ -809,6 +809,25 @@ void SubWriteData(uint16_t Command) // write data
     }
     break;
   }
+  case 0x0037: // AuthenticationKey
+  {
+    if (f_fas)
+    {
+      uint8_t key[16] = {0}; 
+      // 下发的密码需要反序再参与计算
+      for (int8_t j = rx_buffer[1]+ 1, k = 0; j > 0 && k<16; j--)
+      {
+        key[k++] = rx_buffer[j];
+      }
+      /* 写入密码 */
+      uint8_t ret = efuse_key_write(key);
+
+      uint8_t sha1_random_data[BLOCK_CMD_Authenticate_SEND_LEN] = {0};
+      sha1_authenticate(sha1_random_data, key);
+      memcpy(_sha1_reslut, sha1_random_data, BLOCK_CMD_Authenticate_SEND_LEN);
+    }
+    break;
+  }
   case 0x009D: // AccumulationCharge Threshold
   {
     DFUpdate.FLAG = 1;
@@ -1085,16 +1104,16 @@ void SubWriteCtrlCmd(uint16_t Command) // write commond
     break;
   }
 
-  case 0x0037: // AuthenticationKey
-  {
+  // case 0x0037: // AuthenticationKey
+  // {
    
-    if (f_fas)
-    {
+  //   if (f_fas)
+  //   {
 
-      need_change_sha1_pwd=1;
-    }
-    break;
-  }
+  //     need_change_sha1_pwd=1;
+  //   }
+  //   break;
+  // }
   case 0x0038: 
   {
     if (f_fas)
@@ -1429,26 +1448,10 @@ void write_processmsg(uint8_t*rx_buffer,uint8_t g_RecvCnt)
     {
       uint8_t key[16] = {0}; //{0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF, 0xFE, 0xDC, 0xBA, 0x98, 0x76, 0x54, 0x32, 0x10 }; //16*8=128bit
       memcpy(key, (uint8_t *)USER_KEY_REGION, sizeof(key));
-      if (need_change_sha1_pwd == 1)
-      {
-        // 下发的密码需要反序再参与计算
-        for (int8_t j = rx_buffer[1] + 1, k = 0; j > 0; j--)
-        {
-          key[k++] = rx_buffer[j];
-        }
-        /* 写入密码 */
-        uint8_t ret=efuse_key_write(key);
-      }
       uint8_t sha1_random_data[BLOCK_CMD_Authenticate_SEND_LEN] = {0};
       memcpy(sha1_random_data, &rx_buffer[2], BLOCK_CMD_Authenticate_SEND_LEN);
-      if (need_change_sha1_pwd == 1)
-      {
-        memset(sha1_random_data, 0, sizeof(sha1_random_data));
-        need_change_sha1_pwd = 0; // 清除修改密码标志
-      }
       sha1_authenticate(sha1_random_data, key);
       memcpy(_sha1_reslut, sha1_random_data, BLOCK_CMD_Authenticate_SEND_LEN);
-
       break;
     }
 

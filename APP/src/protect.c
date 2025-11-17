@@ -2493,7 +2493,7 @@ void plugged_IN(void)
        }
        else
        {
-           if (V_max < D_PI_MODE_Dsg_to_Voltage)
+           if (V_min < D_PI_MODE_Dsg_to_Voltage)
            {
                pi_blance_disable();
                f_pi_mode = 0;
