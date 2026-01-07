@@ -713,7 +713,7 @@ uint8_t LifeTimeData_WriteDF(void)
 	uint32_t data;
 
 	flash_unlock();
-	
+
 	LFW_Index();
 
 	apwork1 = (uint8_t *)((G_pFlashAddr + LF_DATA_OFFSET) + ((uint16_t)(G_index / 4) * LT_LEN));
@@ -733,11 +733,11 @@ uint8_t LifeTimeData_WriteDF(void)
 	}
 	//    aret = DataFlash_Write( (uint32_t)apwork2, altdat, LTSIZE);
 
-	   __disable_irq();
+	__disable_irq();
 	flash_unlock();
 	for (al1 = 0; al1 < sizeof(LifeTimes); al1 += 4)
 	{
-		memcpy(&data,(uint8_t*)(&l_lifetimes) + al1,4);
+		memcpy(&data, (uint8_t *)(&l_lifetimes) + al1, 4);
 		aret = flash_word_program((uint32_t)(apwork2 + al1), data);
 		if (aret != FLASH_STATUS_COMPLETE)
 		{
@@ -746,7 +746,7 @@ uint8_t LifeTimeData_WriteDF(void)
 	}
 	__enable_irq();
 
-	//aret = DataFlash_Write((uint32_t)apwork2, lfarr, LTSIZE);
+	// aret = DataFlash_Write((uint32_t)apwork2, lfarr, LTSIZE);
 	if (aret == 1) // OK ?
 	{
 		DF_IndexW(W_OK); // Write index(Write OK)
@@ -755,7 +755,7 @@ uint8_t LifeTimeData_WriteDF(void)
 	{					 // NG
 		DF_IndexW(W_NG); // Write index (Write NG)
 	}
-	
+
 	if (f_lf_breq) // BlockB Erase request exist ?
 	{
 		if (!Block_Erase(LF_BLOCK_B)) // BlockB erase)

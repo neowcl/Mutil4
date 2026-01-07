@@ -450,7 +450,7 @@ void MCU_FWDG_init(void)
 {
     /* Counter Reload Value = T * (LRC/div) */
     uint16_t fwdt_reload = 60 * 10000 / 256;//3100
-    logInfo("fwdt_reload = %d\n", fwdt_reload);
+    //logInfo("fwdt_reload = %d\n", fwdt_reload);
     /* Enable write access. */
 	__FWDT_WRITE_ACCESS_ENABLE();  
     /* Config prescaler. */

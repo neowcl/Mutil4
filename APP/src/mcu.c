@@ -162,9 +162,9 @@ void McuDrvInit(void)
 
 	I2C_init();
 	SBS_init();
-	#ifndef DEBUG_MODE
+	//#ifndef DEBUG_MODE
 	log_init();
-	#endif
+	//#endif
 
 	lptime_config(); // LPT timer init
 	exti4_15_PA13_config();

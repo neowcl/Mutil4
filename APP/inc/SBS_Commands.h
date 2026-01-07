@@ -17,11 +17,9 @@ extern "C"
 #define PackVoltage()       (_DAStatus1.PackVoltage)        // 0x47
 
 #define FW_TYPE               0x02  //软件类型
-<<<<<<< HEAD
-#define FW_VERSION            0x0108 //软件版本号    //  log data cell voltage for dsg_upda
-=======
-#define FW_VERSION            0x0107 //软件版本号    //  log data cell voltage for dsg_upda
->>>>>>> 9ba71db85809110976611cd81ed0edd11df5e1e7
+
+#define FW_VERSION            0x0200 //软件版本号    //  log data cell voltage for dsg_upda
+
 
 #pragma pack(push, 1)
     typedef struct

@@ -7,7 +7,7 @@ uint16_t altflg;
 uint16_t lt_test = 1;
 
 uint16_t LtW_Cnt[19] = {0};
-uint16_t LtW_CntW;
+uint32_t LtW_CntW;
 uint32_t CellCBTime_Cnt[4] = {0};
 uint32_t Fwrun_Cnt = 0;
 
@@ -1014,15 +1014,7 @@ void LifeTime(void)
         }
         vtc_Flg = f_VCT;
 
-        if (f_sleep)
-        {
-            LtW_CntW += SleepPeriod;
-        }
-        else
-        {
-            LtW_CntW += NormalPeriod;
-        }
-
+        LtW_CntW +=  Periodtime;
         if ((LtW_CntW / 1000) >= (LTW_DELAY / lt_test))
         {
             f_ltreqW = ON;
@@ -1036,17 +1028,16 @@ void LifeTime(void)
 
 void lifetime_time_period(void)
 {
-      if (f_sleep)
-        {
-            rsoc_Cnt =SleepPeriod*lt_test;
-        }
-        else
-        {
-            rsoc_Cnt = NormalPeriod*lt_test;
-        }
-        //printf("rsoc_Cnt= %d\n",rsoc_Cnt);
+    //   if (f_sleep)
+    //     {
+    //         rsoc_Cnt =SleepPeriod*lt_test;
+    //     }
+    //     else
+    //     {
+    //         rsoc_Cnt = NormalPeriod*lt_test;
+    //     }
+       rsoc_Cnt=Periodtime*lt_test;
        lifetime_ram._TotalFwRuntime += rsoc_Cnt;
-       //printf("LifeTimes_Total_Firmware_Runtime = %d\n",LifeTimes_Total_Firmware_Runtime);
         switch (nChargingStatus.data[0])
         {
         case TR_UT:

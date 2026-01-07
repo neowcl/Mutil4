@@ -2,7 +2,7 @@
 
 uint16_t Device_Type = 450;
 FirmwareVersion Firmware_Version = {0x0000, FW_VERSION,FW_TYPE,0x0904, 0x0005};
-uint8_t Hardware_Version[] = "SFG";
+uint8_t Hardware_Version[] ="CBM8580V2";
 
 
 /*0x01*/uint16_t _RemainingCapacityAlarm;

@@ -455,7 +455,7 @@ Block SubCmdReadData(uint16_t Command) // read data
   case 0x0003: // HardwareVersion
   {
     blk_read_case_last = Command;
-    block.m_block.length = 3;
+    block.m_block.length = 9;
     memcpy(block.m_block.data, Hardware_Version, block.m_block.length);
     break;
   }
@@ -2102,6 +2102,7 @@ void SmbusMACWriteInstruction(void)
       lifetime_time_store();
       if (LifeTimeData_WriteDF())
       {
+        //printf("write lfit\r\n");
         f_ltreqW = OFF;
         lifetime_time_clear();
       }

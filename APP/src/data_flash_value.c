@@ -284,7 +284,7 @@ const volatile FlashData flashdata __attribute__((used)) __attribute__((section(
 		0x43,	/* Enabled PF C                       	*                                  	*                                  	*/
 		0x30,	/* Enabled PF D                       	*                                  	*                                  	*/
 		0x00,	/* AFE Protection Control             	AFE                                	*                                  	*/
-		0x0018, /* Manufacturing Status Init          	*                                  	*                                  	*/
+		0x0038, /* Manufacturing Status Init          	*                                  	*                                  	*/
 		-1000,	/* Accumulate Charg Measuremen        	Accumulate Charg Measuremen        	*                                  	*/
 		1000,	/* Accum Charge Threshold             	*                                  	*                                  	*/
 		10,		/* TimeRSOCThresholdA                 	Lifetime Setting                   	*                                  	*/

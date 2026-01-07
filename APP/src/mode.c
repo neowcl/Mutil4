@@ -726,11 +726,6 @@ void FullCharge_Chk(void)
             // t_com3a_out = NUMBER_SERIES  ;
             if ((V_max >= (_ChargingVoltage/NUMBER_SERIES - D_Termination_Charge_Term_Voltage)) && (_AverageCurrent < Charge_Term))
             {
-                // t_com15_test = _ChargingVoltage ;
-                // if (!getSoftTimerStatus(SOFT_TIMER_FC_ID))
-                // {
-                //     StartSoftTimer(SOFT_TIMER_FC_ID, SINGLE_MODE, D_Termination_Fullcharge_judgement_time * 1000, FullCharge);
-                // }
                 tfc_cnt++; // Full Charge check count + 1
                 rc_integral += I_abs;
                 // Full charge determination time elapsed ?
@@ -748,6 +743,10 @@ void FullCharge_Chk(void)
                         tfc_cnt = D_Termination_Fullcharge_judgement_time - 1;
                     }
                 }
+            }
+            else if(SafetyStatus(COV))
+            {
+                FullCharge();
             }
             // else
             // {
